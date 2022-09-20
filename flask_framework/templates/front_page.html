@@ -3,14 +3,14 @@
 {% block head %}
     <title>Smart Water</title>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>  
+    <script src="{{ url_for('static', filename='JS/basic_elements/load_map.js') }}"></script>
     <style>
-    body { margin: 0; padding: 0; }
-    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    #map { position: absolute; top: 7%; bottom: 0%; width: 100%; }
     </style>
 {% endblock %}
 
 {% block body %}
 <div id="map"></div>
-<script src="{{ url_for('static', filename='JS/front_page.js') }}"></script>
+<script type="text/javascript"> load_map("map"); </script>
 {% endblock %}

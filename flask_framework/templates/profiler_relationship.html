@@ -1,0 +1,50 @@
+{% extends 'plot_layout.html' %}
+
+{% block head %}
+    <title>Relationship Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layouts/profiler_historical.css') }}">
+{% endblock %}
+
+{% block dataFilter %}
+        <div class="smallMap" id="small_map_profiler"></div>
+        <script type="text/javascript"> load_map("small_map_profiler"); </script>
+        
+        <!-- choose the sensors to show -->
+        <form style="border-top: 2px solid #8a8383 ;margin-top: 5%;">
+            <label style="display:block;margin-top: 5%;">Sensors list:</label><br>
+            <input type="checkbox" id="relationship_sensor1" name="sensor1" value="sensor1">
+            <label for="sensor1"> Temperature(&#176)</label><br>
+            <input type="checkbox" id="relationship_sensor2" name="sensor2" value="sensor2">
+            <label for="sensor2"> Electrical Conductivity (μs/cm)</label><br>
+            <input type="checkbox" id="relationship_sensor3" name="sensor3" value="sensor3">
+            <label for="sensor3"> Specific Conductivity (μs/cm)</label><br>
+            <input type="checkbox" id="relationship_sensor4" name="sensor4" value="sensor4">
+            <label for="sensor4"> Salinity PPT </label><br>
+            <input type="checkbox" id="relationship_sensor5" name="sensor5" value="sensor5">
+            <label for="sensor5"> PH</label><br>
+            <input type="checkbox" id="relationship_sensor6" name="sensor6" value="sensor6">
+            <label for="sensor6"> ODO SAT</label><br>
+            <input type="checkbox" id="relationship_sensor7" name="sensor7" value="sensor7">
+            <label for="sensor7"> Turbidity NTU</label><br>
+            <input type="checkbox" id="relationship_sensor8" name="sensor8" value="sensor8">
+            <label for="sensor8"> Turbidity FNU</label><br>
+            <input type="checkbox" id="relationship_sensor10" name="sensor10" value="sensor10">
+            <label for="sensor10"> fDOM RFU</label><br>
+            <input type="checkbox" id="relationship_sensor11" name="sensor11" value="sensor11">
+            <label for="sensor11"> fDOM OSU</label><br><br>
+
+            <!-- submit button -->
+            <input type="button" value="Submit" id="relationship_submit">
+
+            <input type="checkbox" id="relationship_sensor9" name="sensor9" value="sensor9" style="display: none;">
+            <label for="sensor9"  style="display: none;"> Sensor parameter 9</label><br>
+            </form>
+{% endblock %}
+
+{% block graphContainer %}
+
+<div class="split graph_container" id="relationship_graph_container"></div>
+
+<script src="{{ url_for('static', filename='JS/relationship_analysis.js') }}"></script>
+
+{% endblock %}

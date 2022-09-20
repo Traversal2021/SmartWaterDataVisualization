@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/layouts/plot_layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/basic_elements/toggle.css') }}">
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-array@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-time@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-time-format@4"></script>
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>       
+    <script src="{{ url_for('static', filename='JS/basic_elements/load_map.js') }}"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class="topnav">
+        <a href="/">ALL4WASH</a>
+        <a >Maps</a>
+        <a class="active">Plots</a>
+        <a >Log out</a>
+    </div>
+
+    <div class="content">
+
+        <div class="split data_filter" id="historical_data_filter">
+            {% block dataFilter %}{% endblock %}
+        </div>
+        
+        <!-- graph container -->
+        <div class="split graph_container" id="graph_container">
+            {% block graphContainer %}{% endblock %}
+        </div>
+        
+    </div>
+</body>
+</html>

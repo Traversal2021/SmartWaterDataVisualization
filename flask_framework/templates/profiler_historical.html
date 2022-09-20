@@ -1,0 +1,93 @@
+{% extends 'plot_layout.html' %}
+
+{% block head %}
+    <title>Historical data</title>
+{% endblock %}
+
+{% block dataFilter %}
+    <div class="smallMap" id="small_map"></div>
+    <script type="text/javascript"> load_map("small_map"); </script>
+
+    <div class="range_container">
+        <div id="time_series_selection">
+            <h3 style="display: inline-block; margin-left: 2%;">Time series plot</h3>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="toggle round"></span>
+            </label>
+        </div>
+
+       
+        <div  style="display:block;margin-bottom: 2%;width: 80%; left: 10%;">
+            <input type="range" min="{{start_depth}}" max="{{end_depth}}" value="{{start_depth}}" class="slider" id="depth_slider">
+            <input type="text" class="text_input"  id="selected_depth" style="margin-top: 8%; margin-bottom:2%;">
+        </div>
+        
+
+        <div id="slider-range" style="margin-bottom: 2%;width: 80%; left: 10%;"></div>
+        <div id="selected_time" style="margin-top: 0%;">
+            <input type="text" class="text_input"  id="started_time">
+            <input type="text" class="text_input"  id="end_time">
+        </div>
+        <script type="text/javascript">
+            $(function() {
+                $( "#selected_depth" ).val( "Selected depth: "+ document.getElementById("depth_slider").value +"m");                
+
+                $( "#slider-range" ).slider({
+                    range: true,
+                    min: new Date("{{start_time}}").getTime() ,
+                    max: new Date("{{end_time}}").getTime(),
+                    step: 86400,
+                    values: [ new Date("{{start_time}}").getTime(), new Date("{{end_time}}").getTime()],
+                    
+                });
+                $( "#started_time" ).val( "Start time: "+ (new Date($( "#slider-range" ).slider( "values", 0 )))); 
+                $( "#end_time" ).val( "End time: "+ (new Date($( "#slider-range" ).slider( "values", 1 )))); 
+                });
+        </script>
+    </div>
+
+    <form style="border-top: 2px solid #8a8383 ;margin-top: 0%;">
+        <div id="plot_settings" style="display: flex;">
+            <h3 style="display: inline-block; margin-left: 2%;">Plot settings</h3>
+            <select name="frequency" id="freqency_select" style="margin-left: 35%; height: 50%; margin-top:5%;">
+                <option value="minutely">Minutely</option>
+                <option value="hourly">Hourly</option>
+            </select><br><br>
+        </div>
+        <!-- choose the sensors to show -->
+        <!-- <label>Sensors list:</label><br> -->
+        <input type="checkbox" id="sensor1" name="sensor1" value="sensor1">
+        <label for="sensor1"> Temperature(&#176)</label><br>
+        <input type="checkbox" id="sensor2" name="sensor2" value="sensor2">
+        <label for="sensor2"> Electrical Conductivity (μs/cm)</label><br>
+        <input type="checkbox" id="sensor3" name="sensor3" value="sensor3">
+        <label for="sensor3"> Specific Conductivity (μs/cm)</label><br>
+        <input type="checkbox" id="sensor4" name="sensor4" value="sensor4">
+        <label for="sensor4"> Salinity PPT</label><br>
+        <input type="checkbox" id="sensor5" name="sensor5" value="sensor5">
+        <label for="sensor5"> PH</label><br>
+        <input type="checkbox" id="sensor6" name="sensor6" value="sensor6">
+        <label for="sensor6"> ODO SAT</label><br>
+        <input type="checkbox" id="sensor7" name="sensor7" value="sensor7">
+        <label for="sensor7"> Turbidity NTU</label><br>
+        <input type="checkbox" id="sensor8" name="sensor8" value="sensor8">
+        <label for="sensor8"> Turbidity FNU</label><br>
+        <input type="checkbox" id="sensor10" name="sensor10" value="sensor10">
+        <label for="sensor10"> fDOM RFU</label><br>
+        <input type="checkbox" id="sensor11" name="sensor11" value="sensor11">
+        <label for="sensor11"> fDOM OSU</lbel><br><br>
+
+        <!-- submit button -->
+        <input type="button" value="Submit" id="submit">
+        <input type="checkbox" id="sensor9" name="sensor9" value="sensor9" style="display:none ;">
+        <label for="sensor9" style="display:none;"> Sensor parameter 9</label><br>
+    </form>
+{% endblock %}
+
+{% block graphContainer %}
+<!-- graph container -->
+<div class="split graph_container" id="graph_container"></div>
+<script src="{{ url_for('static', filename='JS/historical_data.js') }}"></script>
+
+{% endblock %}
