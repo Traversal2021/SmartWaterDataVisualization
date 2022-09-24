@@ -20,7 +20,7 @@ sensors_dict={
     'sensor10':'sensorParms(10)',
     'sensor11':'sensorParms(11)',
 }
-
+   
 def raw_data_reading():
     raw_data_step = pd.read_csv("../RawData/Profiler_modem_PFL_Step.dat", low_memory=False)
     raw_data_step.drop([0,1], axis=0, inplace=True)
